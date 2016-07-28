@@ -27,6 +27,19 @@
                    enabled="${access.logging.enabled}"/>
             <Host name='localhost'>
                 <Listener className="com.gopivotal.cloudfoundry.tomcat.lifecycle.ApplicationStartupFailureDetectingLifecycleListener"/>
+                          <!-- 1 - Ensure root module registration -->
+          	    <Context path="/ebx-root-1.0" docBase="ebx/ebx-root-1.0.war"/>
+           
+          	    <!-- 2 - Ensure core modules registration -->
+          	    <Context path="/ebx-dma" docBase="ebx/ebx-dma.war"/>      
+          	    <Context path="/ebx-dataservices" docBase="ebx/ebx-dataservices.war"/>   
+          	    <Context path="/ebx-manager" docBase="ebx/ebx-manager.war"/>
+           
+          	    <!-- 3 - Declare used add-ons and your specific module -->
+          	    ....
+          	    
+          	    <!-- 4 - Start EBX -->
+          	    <Context path="/ebx" crossContext="true" docBase="ebx.war”/>
             </Host>
         </Engine>
     </Service>
